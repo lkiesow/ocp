@@ -1,5 +1,3 @@
-use <module-nuthole.scad>;
-
 y_overlap=6;
 y_channel=25;
 x_outer=6;
@@ -11,6 +9,16 @@ wall=3;
 b_rad=2;
 null=0.001;
 
+module nuthole(height) {
+    translate([0,0,1.5])
+    hull() {
+        w_nut=3.9;
+                          cube([w_nut, 7.5, height], center=true);
+        rotate([0,0,120]) cube([w_nut, 7.5, height], center=true);
+        rotate([0,0,240]) cube([w_nut, 7.5, height], center=true);
+    }
+}
+
 difference() {
 union() {
     // over case
@@ -18,7 +26,7 @@ union() {
         translate([b_rad/2, b_rad/2,0])
         cube([x_outer+xy_screw+wall-b_rad,
               y_overlap+wall-b_rad,
-              z_case+z_top-b_rad/2]);
+              z_case+z_top-b_rad/2-25]);
         sphere(d=b_rad, $fn=20);
     }
 
